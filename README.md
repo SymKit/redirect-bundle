@@ -39,6 +39,7 @@ symkit_redirect:
     enabled: true
     doctrine:
         entity_class: Symkit\RedirectBundle\Entity\Redirect
+        repository_class: Symkit\RedirectBundle\Repository\RedirectRepository
     admin:
         enabled: true
         route_prefix: admin_redirect
@@ -51,6 +52,7 @@ symkit_redirect:
 
 - **enabled**: Enable or disable the whole bundle.
 - **doctrine.entity_class**: FQCN of the redirect entity (see "Custom entity").
+- **doctrine.repository_class**: FQCN of the redirect repository.
 - **admin.enabled**: Register the CRUD controller and admin routes.
 - **admin.route_prefix**: Prefix for route names (e.g. `admin_redirect_list`, `admin_redirect_edit`).
 - **admin.path_prefix**: URL path prefix (e.g. `/admin/redirects`).
@@ -138,7 +140,6 @@ The bundle is covered by **unit** tests (services, form, validation), **integrat
 
 ```bash
 make install
-make install-hooks   # Commit hook to strip Co-authored-by
 make cs-fix
 make phpstan
 make test

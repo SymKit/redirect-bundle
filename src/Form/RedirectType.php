@@ -18,8 +18,12 @@ final class RedirectType extends AbstractType
 {
     private const TRANSLATION_DOMAIN = 'SymkitRedirectBundle';
 
+    /**
+     * @param class-string $entityClass
+     */
     public function __construct(
         private readonly TranslatorInterface $translator,
+        private readonly string $entityClass = Redirect::class,
     ) {
     }
 
@@ -61,7 +65,7 @@ final class RedirectType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Redirect::class,
+            'data_class' => $this->entityClass,
             'translation_domain' => 'SymkitRedirectBundle',
         ]);
     }

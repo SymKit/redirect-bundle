@@ -39,6 +39,11 @@ class RedirectBundle extends AbstractBundle
                             ->cannotBeEmpty()
                             ->info('FQCN of the redirect entity.')
                         ->end()
+                        ->scalarNode('repository_class')
+                            ->defaultValue(RedirectRepository::class)
+                            ->cannotBeEmpty()
+                            ->info('FQCN of the redirect repository.')
+                        ->end()
                     ->end()
                 ->end()
                 ->arrayNode('admin')
@@ -85,7 +90,7 @@ class RedirectBundle extends AbstractBundle
     /**
      * @param array{
      *     enabled: bool,
-     *     doctrine: array{entity_class: class-string},
+     *     doctrine: array{entity_class: class-string, repository_class: class-string},
      *     admin: array{enabled: bool, route_prefix: string, path_prefix: string},
      *     listener: array{enabled: bool},
      *     search: array{enabled: bool},
@@ -98,6 +103,7 @@ class RedirectBundle extends AbstractBundle
         }
 
         $entityClass = $config['doctrine']['entity_class'];
+        $repositoryClass = $config['doctrine']['repository_class'];
 
         $container->parameters()
             ->set('symkit_redirect.admin.path_prefix', $config['admin']['path_prefix']);
@@ -107,10 +113,10 @@ class RedirectBundle extends AbstractBundle
             ->autowire()
             ->autoconfigure();
 
-        $services->set(RedirectRepository::class)
+        $services->set($repositoryClass)
             ->arg('$entityClass', $entityClass)
             ->tag('doctrine.repository_service');
-        $services->alias(RedirectRepositoryInterface::class, RedirectRepository::class);
+        $services->alias(RedirectRepositoryInterface::class, $repositoryClass);
 
         if ($config['listener']['enabled']) {
             $services->set(RedirectService::class)
@@ -124,6 +130,7 @@ class RedirectBundle extends AbstractBundle
 
         if ($config['admin']['enabled']) {
             $services->set(RedirectType::class)
+                ->arg('$entityClass', $entityClass)
                 ->tag('form.type');
             $services->set(RedirectController::class)
                 ->arg('$redirectEntityClass', $entityClass)
