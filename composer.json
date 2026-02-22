@@ -17,12 +17,12 @@
         "php": ">=8.2",
         "doctrine/orm": "^2.14 || ^3.6",
         "symfony/framework-bundle": "^7.0 || ^8.0",
-        "symkit/crud-bundle": "^0.0.2",
-        "symkit/form-bundle": "^0.0.1",
-        "symkit/metadata-bundle": "^0.0.1",
-        "symkit/menu-bundle": "^0.0.1",
-        "symkit/routing-bundle": "^0.0.2",
-        "symkit/search-bundle": "^0.0.1"
+        "symkit/crud-bundle": "~0.0.1",
+        "symkit/form-bundle": "~0.0.1",
+        "symkit/metadata-bundle": "~0.0.1",
+        "symkit/menu-bundle": "~0.0.1",
+        "symkit/routing-bundle": "~0.0.1",
+        "symkit/search-bundle": "~0.0.1"
     },
     "require-dev": {
         "deptrac/deptrac": "^2.0",
