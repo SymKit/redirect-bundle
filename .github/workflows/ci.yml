@@ -41,12 +41,17 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer update --no-progress --prefer-dist
+        run: |
+          if [ -f composer.lock ]; then
+            composer install --no-progress --prefer-dist
+          else
+            composer update --no-progress --prefer-dist
+          fi
 
-      - name: Install Symfony version
+      - name: Pin Symfony version for matrix
         run: composer require "symfony/framework-bundle:${{ matrix.symfony }}" --no-update
 
-      - name: Update with Symfony constraint
+      - name: Update Symfony and lockfile
         run: composer update symfony/* --no-progress --prefer-dist
 
       - name: Run CI pipeline
