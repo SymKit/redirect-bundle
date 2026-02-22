@@ -1,0 +1,29 @@
+# Admin routes for redirects.
+# In your app config/routes.yaml, import with:
+#   symkit_redirect:
+#     resource: '@SymkitRedirectBundle/config/routes.yaml'
+#     prefix: '%symkit_redirect.admin.path_prefix%'
+
+admin_redirect_list:
+    path: /
+    name: admin_redirect_list
+    controller: Symkit\RedirectBundle\Controller\Admin\RedirectController::list
+    methods: [GET]
+
+admin_redirect_create:
+    path: /create
+    name: admin_redirect_create
+    controller: Symkit\RedirectBundle\Controller\Admin\RedirectController::create
+    methods: [GET, POST]
+
+admin_redirect_edit:
+    path: /{id}/edit
+    name: admin_redirect_edit
+    controller: Symkit\RedirectBundle\Controller\Admin\RedirectController::edit
+    methods: [GET, POST]
+
+admin_redirect_delete:
+    path: /{id}/delete
+    name: admin_redirect_delete
+    controller: Symkit\RedirectBundle\Controller\Admin\RedirectController::delete
+    methods: [POST]

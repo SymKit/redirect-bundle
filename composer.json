@@ -1,0 +1,50 @@
+{
+    "name": "symkit/redirect-bundle",
+    "description": "This bundle allows you to manage internal and external redirects directly from your database",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Symkit\\RedirectBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Symkit\\RedirectBundle\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=8.2",
+        "doctrine/orm": "^3.6",
+        "symfony/framework-bundle": "^7.0 || ^8.0",
+        "symkit/crud-bundle": "^0.0.2",
+        "symkit/form-bundle": "^0.0.1",
+        "symkit/metadata-bundle": "^0.0.1",
+        "symkit/menu-bundle": "^0.0.1",
+        "symkit/routing-bundle": "^0.0.2",
+        "symkit/search-bundle": "^0.0.1"
+    },
+    "require-dev": {
+        "deptrac/deptrac": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "infection/infection": "^0.29",
+        "nyholm/symfony-bundle-test": "^3.0",
+        "phpro/grumphp": "^2.0",
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^11.0",
+        "symkit/bundle-ai-kit": "^0.0.7"
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true,
+            "phpro/grumphp": true,
+            "symkit/bundle-ai-kit": true
+        }
+    },
+    "extra": {
+        "bundle-ai-kit": {
+            "editors": ["cursor"],
+            "skills": ["symfony-bundle-core", "symfony-bundle-ux", "symfony-bundle-doctrine", "symfony-bundle-flex", "symfony-bundle-quality"]
+        }
+    }
+}

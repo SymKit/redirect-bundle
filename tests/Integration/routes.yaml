@@ -1,0 +1,7 @@
+# Minimal routes for integration test kernel
+_test_home:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+    defaults:
+        path: /
+        permanent: true

@@ -1,0 +1,73 @@
+deptrac:
+    paths:
+        - ./src
+    layers:
+        - name: Contract
+          collectors:
+            - type: directory
+              value: src/Contract/.*
+        - name: Entity
+          collectors:
+            - type: directory
+              value: src/Entity/.*
+        - name: Repository
+          collectors:
+            - type: directory
+              value: src/Repository/.*
+        - name: Form
+          collectors:
+            - type: directory
+              value: src/Form/.*
+        - name: Search
+          collectors:
+            - type: directory
+              value: src/Search/.*
+        - name: EventListener
+          collectors:
+            - type: directory
+              value: src/EventListener/.*
+        - name: Service
+          collectors:
+            - type: directory
+              value: src/Service/.*
+        - name: Controller
+          collectors:
+            - type: directory
+              value: src/Controller/.*
+        - name: Bundle
+          collectors:
+            - type: classNameRegex
+              value: '/^Symkit\\\\RedirectBundle\\\\RedirectBundle$/'
+    ruleset:
+        Contract: []
+        Entity:
+            - Contract
+            - Repository
+        Repository:
+            - Entity
+        Form:
+            - Contract
+            - Entity
+        Search:
+            - Contract
+            - Entity
+            - Repository
+        EventListener:
+            - Contract
+            - Service
+        Service:
+            - Contract
+            - Repository
+            - Entity
+        Controller:
+            - Contract
+            - Entity
+            - Form
+        Bundle:
+            - Contract
+            - Controller
+            - EventListener
+            - Form
+            - Repository
+            - Search
+            - Service

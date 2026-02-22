@@ -1,0 +1,10 @@
+{% if entity.route %}
+    <span class="inline-flex items-center gap-x-1.5 rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+        {{ ux_icon('heroicons:arrow-up-right-20-solid', {class: 'h-3.5 w-3.5'}) }}
+        {{ entity.route.name }}
+    </span>
+{% elseif entity.urlTo %}
+    <code class="text-sm text-gray-600 dark:text-gray-400">{{ entity.urlTo }}</code>
+{% else %}
+    <span class="text-gray-400 italic text-xs">{{ 'crud.field.destination_no_destination'|trans({}, 'SymkitRedirectBundle') }}</span>
+{% endif %}

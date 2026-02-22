@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="validators">
+        <body>
+            <trans-unit id="redirect.unique_pair">
+                <source>redirect.unique_pair</source>
+                <target>This redirect source and destination pair already exists.</target>
+            </trans-unit>
+            <trans-unit id="redirect.unique_source">
+                <source>redirect.unique_source</source>
+                <target>This source URL is already being redirected.</target>
+            </trans-unit>
+            <trans-unit id="redirect.url_slash">
+                <source>redirect.url_slash</source>
+                <target>The URL must be relative and start with a slash (e.g. /my-page)</target>
+            </trans-unit>
+            <trans-unit id="redirect.destination_different">
+                <source>redirect.destination_different</source>
+                <target>The destination URL cannot be the same as the source URL.</target>
+            </trans-unit>
+            <trans-unit id="redirect.destination_required">
+                <source>redirect.destination_required</source>
+                <target>You must provide either a destination URL or a target route.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

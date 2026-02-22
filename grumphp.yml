@@ -1,0 +1,15 @@
+grumphp:
+    tasks:
+        phpstan:
+            configuration: phpstan.neon.dist
+            memory_limit: 512M
+        phpcsfixer:
+            config: .php-cs-fixer.dist.php
+        phpunit:
+            config_file: phpunit.xml.dist
+        deptrac:
+            depfile: deptrac.yaml
+        infection:
+            min_msi: 70
+            min_covered_msi: 70
+            configuration: infection.json5

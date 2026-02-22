@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="SymkitRedirectBundle">
+        <body>
+            <trans-unit id="admin.page_title.list">
+                <source>admin.page_title.list</source>
+                <target>Redirects</target>
+            </trans-unit>
+            <trans-unit id="admin.page_description.list">
+                <source>admin.page_description.list</source>
+                <target>Manage URL redirects.</target>
+            </trans-unit>
+            <trans-unit id="admin.page_title.create">
+                <source>admin.page_title.create</source>
+                <target>Create Redirect</target>
+            </trans-unit>
+            <trans-unit id="admin.page_description.create">
+                <source>admin.page_description.create</source>
+                <target>Create a new URL redirect.</target>
+            </trans-unit>
+            <trans-unit id="admin.page_title.edit">
+                <source>admin.page_title.edit</source>
+                <target>Edit Redirect</target>
+            </trans-unit>
+            <trans-unit id="admin.page_description.edit">
+                <source>admin.page_description.edit</source>
+                <target>Update redirect settings.</target>
+            </trans-unit>
+            <trans-unit id="admin.field.source">
+                <source>admin.field.source</source>
+                <target>Source</target>
+            </trans-unit>
+            <trans-unit id="admin.field.destination">
+                <source>admin.field.destination</source>
+                <target>Destination</target>
+            </trans-unit>
+            <trans-unit id="admin.field.created">
+                <source>admin.field.created</source>
+                <target>Created</target>
+            </trans-unit>
+            <trans-unit id="form.section.general">
+                <source>form.section.general</source>
+                <target>General</target>
+            </trans-unit>
+            <trans-unit id="form.section.general_description">
+                <source>form.section.general_description</source>
+                <target>Define the redirection source and destination.</target>
+            </trans-unit>
+            <trans-unit id="form.field.url_from">
+                <source>form.field.url_from</source>
+                <target>From URL</target>
+            </trans-unit>
+            <trans-unit id="form.field.url_from_placeholder">
+                <source>form.field.url_from_placeholder</source>
+                <target>/old-path</target>
+            </trans-unit>
+            <trans-unit id="form.field.url_from_help">
+                <source>form.field.url_from_help</source>
+                <target>Relative source URL starting with a slash (e.g., /old-page).</target>
+            </trans-unit>
+            <trans-unit id="form.field.url_to">
+                <source>form.field.url_to</source>
+                <target>External URL</target>
+            </trans-unit>
+            <trans-unit id="form.field.url_to_placeholder">
+                <source>form.field.url_to_placeholder</source>
+                <target>/new-path</target>
+            </trans-unit>
+            <trans-unit id="form.field.url_to_help">
+                <source>form.field.url_to_help</source>
+                <target>Relative destination URL (e.g., /new-page).</target>
+            </trans-unit>
+            <trans-unit id="form.field.route">
+                <source>form.field.route</source>
+                <target>Internal Route</target>
+            </trans-unit>
+            <trans-unit id="form.field.route_placeholder">
+                <source>form.field.route_placeholder</source>
+                <target>-- Select a route --</target>
+            </trans-unit>
+            <trans-unit id="form.field.route_help">
+                <source>form.field.route_help</source>
+                <target>Select an existing internal route as destination.</target>
+            </trans-unit>
+            <trans-unit id="redirect.unique_pair">
+                <source>redirect.unique_pair</source>
+                <target>This redirect source and destination pair already exists.</target>
+            </trans-unit>
+            <trans-unit id="redirect.unique_source">
+                <source>redirect.unique_source</source>
+                <target>This source URL is already being redirected.</target>
+            </trans-unit>
+            <trans-unit id="redirect.url_slash">
+                <source>redirect.url_slash</source>
+                <target>The URL must be relative and start with a slash (e.g. /my-page)</target>
+            </trans-unit>
+            <trans-unit id="redirect.destination_different">
+                <source>redirect.destination_different</source>
+                <target>The destination URL cannot be the same as the source URL.</target>
+            </trans-unit>
+            <trans-unit id="redirect.destination_required">
+                <source>redirect.destination_required</source>
+                <target>You must provide either a destination URL or a target route.</target>
+            </trans-unit>
+            <trans-unit id="search.category">
+                <source>search.category</source>
+                <target>Redirects</target>
+            </trans-unit>
+            <trans-unit id="crud.field.destination_no_destination">
+                <source>crud.field.destination_no_destination</source>
+                <target>No destination</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
