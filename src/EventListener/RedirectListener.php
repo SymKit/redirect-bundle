@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symkit\RedirectBundle\Contract\RedirectServiceInterface;
 
-final class RedirectListener
+final readonly class RedirectListener
 {
     public function __construct(
         private readonly RedirectServiceInterface $redirectService,

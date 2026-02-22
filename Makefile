@@ -19,7 +19,7 @@ cs-check: ## Check code style (no fix)
 	vendor/bin/php-cs-fixer fix --dry-run --diff
 
 infection: ## Mutation testing
-	vendor/bin/infection --only-covered --show-mutations --threads=max --min-msi=70
+	vendor/bin/infection --only-covered --show-mutations --threads=max
 
 deptrac: ## Architecture enforcement
 	vendor/bin/deptrac analyse

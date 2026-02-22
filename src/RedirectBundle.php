@@ -9,6 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symkit\RedirectBundle\Contract\RedirectRepositoryInterface;
 use Symkit\RedirectBundle\Contract\RedirectServiceInterface;
 use Symkit\RedirectBundle\Controller\Admin\RedirectController;
 use Symkit\RedirectBundle\Entity\Redirect;
@@ -109,6 +110,7 @@ class RedirectBundle extends AbstractBundle
         $services->set(RedirectRepository::class)
             ->arg('$entityClass', $entityClass)
             ->tag('doctrine.repository_service');
+        $services->alias(RedirectRepositoryInterface::class, RedirectRepository::class);
 
         if ($config['listener']['enabled']) {
             $services->set(RedirectService::class)

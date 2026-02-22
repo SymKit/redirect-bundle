@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Symkit\RedirectBundle\Tests\Integration;
 
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Config\Loader\LoaderInterface;
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
+use Nyholm\BundleTest\TestKernel;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symkit\RedirectBundle\RedirectBundle;
+use Symkit\RoutingBundle\RoutingBundle;
 
-final class RedirectBundleBootTest extends TestCase
+final class RedirectBundleBootTest extends KernelTestCase
 {
     protected function tearDown(): void
     {
@@ -18,63 +20,83 @@ final class RedirectBundleBootTest extends TestCase
         restore_exception_handler();
     }
 
+    protected static function getKernelClass(): string
+    {
+        return TestKernel::class;
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     */
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        /** @var TestKernel $kernel */
+        $kernel = parent::createKernel($options);
+        $kernel->addTestBundle(RedirectBundle::class);
+        if (!isset($options['config'])) {
+            $kernel->addTestConfig(static function (ContainerBuilder $container): void {
+                $container->loadFromExtension('framework', [
+                    'test' => true,
+                    'secret' => 'test',
+                ]);
+                $container->loadFromExtension('symkit_redirect', [
+                    'enabled' => false,
+                ]);
+            });
+        }
+        $kernel->handleOptions($options);
+
+        return $kernel;
+    }
+
     public function testBundleBootsWithDisabledConfig(): void
     {
-        $kernel = new RedirectTestKernel('test', true);
-        $kernel->boot();
+        $kernel = self::bootKernel();
+        $container = $kernel->getContainer();
+
+        self::assertTrue($container->has('kernel'));
+    }
+
+    public function testBundleBootsWithEnabledConfigAndServicesRegistered(): void
+    {
+        $kernel = self::bootKernel([
+            'config' => function (TestKernel $kernel): void {
+                $kernel->setTestProjectDir(\dirname(__DIR__, 2));
+                $kernel->addTestBundle(DoctrineBundle::class);
+                $kernel->addTestBundle(RoutingBundle::class);
+                $kernel->addTestBundle(RedirectBundle::class);
+                $kernel->addTestConfig(static function (ContainerBuilder $container): void {
+                    $container->loadFromExtension('framework', [
+                        'test' => true,
+                        'secret' => 'test',
+                    ]);
+                    $container->loadFromExtension('doctrine', [
+                        'dbal' => ['url' => 'sqlite:///:memory:'],
+                        'orm' => [
+                            'mappings' => [
+                                'RedirectBundle' => [
+                                    'type' => 'attribute',
+                                    'is_bundle' => true,
+                                ],
+                                'RoutingBundle' => [
+                                    'type' => 'attribute',
+                                    'is_bundle' => true,
+                                ],
+                            ],
+                        ],
+                    ]);
+                    $container->loadFromExtension('symkit_redirect', [
+                        'enabled' => true,
+                        'listener' => ['enabled' => true],
+                        'admin' => ['enabled' => false],
+                        'search' => ['enabled' => false],
+                    ]);
+                });
+            },
+        ]);
 
         $container = $kernel->getContainer();
+
         self::assertTrue($container->has('kernel'));
-
-        $kernel->shutdown();
-    }
-}
-
-/**
- * @internal
- */
-final class RedirectTestKernel extends Kernel
-{
-    public function __construct(
-        string $environment,
-        bool $debug,
-    ) {
-        parent::__construct($environment, $debug);
-    }
-
-    public function registerBundles(): iterable
-    {
-        return [
-            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new RedirectBundle(),
-        ];
-    }
-
-    public function registerContainerConfiguration(LoaderInterface $loader): void
-    {
-        $routesPath = __DIR__.'/routes.yaml';
-        $loader->load(static function (ContainerBuilder $container) use ($routesPath): void {
-            $container->loadFromExtension('framework', [
-                'test' => true,
-                'secret' => 'test',
-                'http_method_override' => false,
-                'handle_all_throwables' => true,
-                'php_errors' => ['log' => true],
-                'router' => ['utf8' => true, 'resource' => $routesPath],
-            ]);
-            $container->loadFromExtension('symkit_redirect', [
-                'enabled' => false,
-            ]);
-        });
-    }
-
-    public function getCacheDir(): string
-    {
-        return sys_get_temp_dir().'/symkit_redirect_bundle_test_'.uniqid();
-    }
-
-    public function getLogDir(): string
-    {
-        return sys_get_temp_dir();
     }
 }

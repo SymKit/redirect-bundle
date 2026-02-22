@@ -7,8 +7,8 @@ namespace Symkit\RedirectBundle\Tests\Unit\Service;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symkit\RedirectBundle\Contract\RedirectRepositoryInterface;
 use Symkit\RedirectBundle\Entity\Redirect;
-use Symkit\RedirectBundle\Repository\RedirectRepository;
 use Symkit\RedirectBundle\Service\RedirectService;
 use Symkit\RoutingBundle\Entity\Route;
 
@@ -16,7 +16,7 @@ final class RedirectServiceTest extends TestCase
 {
     public function testGetRedirectTargetReturnsNullWhenNoRedirect(): void
     {
-        $repository = $this->createMock(RedirectRepository::class);
+        $repository = $this->createMock(RedirectRepositoryInterface::class);
         $repository->method('findOneBy')->with(['urlFrom' => '/old'])->willReturn(null);
 
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
@@ -32,7 +32,7 @@ final class RedirectServiceTest extends TestCase
         $redirect->setUrlFrom('/old');
         $redirect->setUrlTo('/new');
 
-        $repository = $this->createMock(RedirectRepository::class);
+        $repository = $this->createMock(RedirectRepositoryInterface::class);
         $repository->method('findOneBy')->with(['urlFrom' => '/old'])->willReturn($redirect);
 
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
@@ -51,7 +51,7 @@ final class RedirectServiceTest extends TestCase
         $redirect->setUrlFrom('/old');
         $redirect->setRoute($route);
 
-        $repository = $this->createMock(RedirectRepository::class);
+        $repository = $this->createMock(RedirectRepositoryInterface::class);
         $repository->method('findOneBy')->with(['urlFrom' => '/old'])->willReturn($redirect);
 
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
@@ -72,7 +72,7 @@ final class RedirectServiceTest extends TestCase
         $redirect->setUrlTo('/fallback');
         $redirect->setRoute($route);
 
-        $repository = $this->createMock(RedirectRepository::class);
+        $repository = $this->createMock(RedirectRepositoryInterface::class);
         $repository->method('findOneBy')->with(['urlFrom' => '/old'])->willReturn($redirect);
 
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);

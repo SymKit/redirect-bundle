@@ -6,6 +6,7 @@ namespace Symkit\RedirectBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symkit\RedirectBundle\Contract\RedirectRepositoryInterface;
 use Symkit\RedirectBundle\Entity\Redirect;
 
 /**
@@ -13,7 +14,7 @@ use Symkit\RedirectBundle\Entity\Redirect;
  *
  * @template T of Redirect
  */
-class RedirectRepository extends ServiceEntityRepository
+final class RedirectRepository extends ServiceEntityRepository implements RedirectRepositoryInterface
 {
     /**
      * @param class-string<T> $entityClass
@@ -24,14 +25,23 @@ class RedirectRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param array<string, mixed>       $criteria
+     * @param array<string, string>|null $orderBy
+     */
+    public function findOneBy(array $criteria, ?array $orderBy = null): ?Redirect
+    {
+        $result = parent::findOneBy($criteria, $orderBy);
+
+        return $result instanceof Redirect ? $result : null;
+    }
+
+    /**
      * @return iterable<int, Redirect>
      */
     public function findForGlobalSearch(string $query, int $limit = 5): iterable
     {
         /** @var iterable<int, Redirect> $result */
         $result = $this->createQueryBuilder('r')
-            ->leftJoin('r.route', 'route')
-            ->addSelect('route')
             ->where('r.urlFrom LIKE :query OR r.urlTo LIKE :query')
             ->setParameter('query', '%'.$query.'%')
             ->setMaxResults($limit)

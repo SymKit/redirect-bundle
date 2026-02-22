@@ -6,8 +6,7 @@ namespace Symkit\RedirectBundle\Search;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symkit\RedirectBundle\Entity\Redirect;
-use Symkit\RedirectBundle\Repository\RedirectRepository;
+use Symkit\RedirectBundle\Contract\RedirectRepositoryInterface;
 use Symkit\SearchBundle\Contract\SearchProviderInterface;
 use Symkit\SearchBundle\Model\SearchResult;
 
@@ -15,11 +14,8 @@ final readonly class RedirectSearchProvider implements SearchProviderInterface
 {
     private const TRANSLATION_DOMAIN = 'SymkitRedirectBundle';
 
-    /**
-     * @param RedirectRepository<Redirect> $redirectRepository
-     */
     public function __construct(
-        private RedirectRepository $redirectRepository,
+        private RedirectRepositoryInterface $redirectRepository,
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
     ) {

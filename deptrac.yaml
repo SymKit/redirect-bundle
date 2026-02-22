@@ -39,11 +39,13 @@ deptrac:
             - type: classNameRegex
               value: '/^Symkit\\\\RedirectBundle\\\\RedirectBundle$/'
     ruleset:
-        Contract: []
+        Contract:
+            - Entity
         Entity:
             - Contract
             - Repository
         Repository:
+            - Contract
             - Entity
         Form:
             - Contract

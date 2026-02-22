@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symkit\RedirectBundle\Contract\RedirectRepositoryInterface;
 use Symkit\RedirectBundle\Entity\Redirect;
-use Symkit\RedirectBundle\Repository\RedirectRepository;
 use Symkit\RedirectBundle\Search\RedirectSearchProvider;
 use Symkit\SearchBundle\Model\SearchResult;
 
@@ -23,7 +23,7 @@ final class RedirectSearchProviderTest extends TestCase
         $ref = new ReflectionProperty(Redirect::class, 'id');
         $ref->setValue($redirect, 1);
 
-        $repository = $this->createMock(RedirectRepository::class);
+        $repository = $this->createMock(RedirectRepositoryInterface::class);
         $repository->method('findForGlobalSearch')->with('old', 5)->willReturn([$redirect]);
 
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
@@ -47,7 +47,7 @@ final class RedirectSearchProviderTest extends TestCase
 
     public function testGetCategoryReturnsTranslatedCategory(): void
     {
-        $repository = $this->createMock(RedirectRepository::class);
+        $repository = $this->createMock(RedirectRepositoryInterface::class);
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $translator = $this->createMock(TranslatorInterface::class);
         $translator->method('trans')->with('search.category', [], 'SymkitRedirectBundle')->willReturn('Redirections');
