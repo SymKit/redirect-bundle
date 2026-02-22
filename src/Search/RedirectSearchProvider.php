@@ -18,6 +18,7 @@ final readonly class RedirectSearchProvider implements SearchProviderInterface
         private RedirectRepositoryInterface $redirectRepository,
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
+        private string $editRouteName = 'admin_redirect_edit',
     ) {
     }
 
@@ -29,7 +30,7 @@ final readonly class RedirectSearchProvider implements SearchProviderInterface
             yield new SearchResult(
                 title: $redirect->getUrlFrom() ?? '',
                 subtitle: '→ '.$redirect->getUrlTo(),
-                url: $this->urlGenerator->generate('admin_redirect_edit', ['id' => $redirect->getId()]),
+                url: $this->urlGenerator->generate($this->editRouteName, ['id' => $redirect->getId()]),
                 icon: 'heroicons:arrow-path-20-solid',
                 badge: null,
             );

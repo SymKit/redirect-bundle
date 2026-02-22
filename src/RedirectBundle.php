@@ -133,6 +133,7 @@ class RedirectBundle extends AbstractBundle
 
         if ($config['search']['enabled']) {
             $services->set(RedirectSearchProvider::class)
+                ->arg('$editRouteName', $config['admin']['route_prefix'].'_edit')
                 ->tag('symkit_search.provider');
         }
     }

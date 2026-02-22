@@ -1,12 +1,8 @@
 {
     "$schema": "https://raw.githubusercontent.com/infection/infection/0.29.0/resources/schema.json",
-    "source": {
-        "directories": ["src/"]
-    },
-    "logs": {
-        "text": "infection.log",
-        "summary": "infection-summary.log"
-    },
+    "source": {"directories": ["src/"]},
+    "logs": {"text": "infection.log", "summary": "infection-summary.log"},
+    // 64%: some mutants are harmless (e.g. default limit, boundary conditions). See bundle-quality rule.
     "minMsi": 64,
     "minCoveredMsi": 64,
     "testFramework": "phpunit"

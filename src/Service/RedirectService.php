@@ -25,9 +25,10 @@ final readonly class RedirectService implements RedirectServiceInterface
             return null;
         }
 
-        if ($route = $redirect->getRoute()) {
+        $routeName = $redirect->getRouteName();
+        if (null !== $routeName && '' !== $routeName) {
             try {
-                return $this->urlGenerator->generate($route->getName() ?? '');
+                return $this->urlGenerator->generate($routeName);
             } catch (Throwable) {
                 // If route generation fails, fall back to urlTo if available
             }

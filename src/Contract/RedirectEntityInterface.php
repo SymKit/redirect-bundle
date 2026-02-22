@@ -19,6 +19,11 @@ interface RedirectEntityInterface
      */
     public function getRoute(): ?object;
 
+    /**
+     * Name of the linked route for URL generation, or null if no route or not applicable.
+     */
+    public function getRouteName(): ?string;
+
     public function getCreatedAt(): ?DateTimeImmutable;
 
     public function __toString(): string;

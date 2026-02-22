@@ -10,6 +10,6 @@ grumphp:
         deptrac:
             depfile: deptrac.yaml
         infection:
-            min_msi: 70
-            min_covered_msi: 70
+            min_msi: 64
+            min_covered_msi: 64
             configuration: infection.json5

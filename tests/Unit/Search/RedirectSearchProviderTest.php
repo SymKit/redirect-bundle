@@ -32,7 +32,7 @@ final class RedirectSearchProviderTest extends TestCase
         $translator = $this->createMock(TranslatorInterface::class);
         $translator->method('trans')->with('search.category', [], 'SymkitRedirectBundle')->willReturn('Redirects');
 
-        $provider = new RedirectSearchProvider($repository, $urlGenerator, $translator);
+        $provider = new RedirectSearchProvider($repository, $urlGenerator, $translator, 'admin_redirect_edit');
 
         $results = iterator_to_array($provider->search('old'));
 
@@ -52,7 +52,7 @@ final class RedirectSearchProviderTest extends TestCase
         $translator = $this->createMock(TranslatorInterface::class);
         $translator->method('trans')->with('search.category', [], 'SymkitRedirectBundle')->willReturn('Redirections');
 
-        $provider = new RedirectSearchProvider($repository, $urlGenerator, $translator);
+        $provider = new RedirectSearchProvider($repository, $urlGenerator, $translator, 'admin_redirect_edit');
 
         self::assertSame('Redirections', $provider->getCategory());
     }

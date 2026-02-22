@@ -123,6 +123,11 @@ class Redirect implements RedirectEntityInterface
         return $this->route;
     }
 
+    public function getRouteName(): ?string
+    {
+        return $this->route?->getName();
+    }
+
     public function setRoute(?Route $route): static
     {
         $this->route = $route;
