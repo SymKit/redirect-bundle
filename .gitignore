@@ -6,4 +6,3 @@ composer.lock
 .deptrac.cache
 infection.log
 infection-summary.log
-.cursor/
